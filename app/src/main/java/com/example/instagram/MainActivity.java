@@ -2,6 +2,7 @@ package com.example.instagram;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView txtGetdata;
     private Button  btnGetData;
     private  String AllFighters;
+    private  Button btnTransition;
+
 
 
     @Override
@@ -42,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         edtKickPower = findViewById(R.id.edtkickPower);
         txtGetdata = findViewById(R.id.txtgetdata);
         btnGetData = findViewById(R.id.btnGetData);
+        btnTransition = findViewById(R.id.btnNextActivity);
+
+
 
 
         btnsave.setOnClickListener(MainActivity.this);
@@ -89,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 FancyToast.makeText(MainActivity.this, AllFighters, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
 
                                 for (ParseObject fighter: objects){
-                                    AllFighters = AllFighters + fighter.get("Name") + "\n";
+                                    AllFighters = AllFighters + fighter.get("name") + "\n";
                                 }
                             }
                         }else {
@@ -102,6 +108,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        //onClickListener for next Activity
+        btnTransition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this,SignUp.class);
+                startActivity(intent);
+
+
+            }
+        });
+
     }
 
 
@@ -109,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
             try {
-                final ParseObject fighter = new ParseObject("fighter");
+                final ParseObject fighter = new ParseObject("fight er");
                 fighter.put("Name", edtName.getText().toString());
                 fighter.put("punch_speed", Integer.parseInt(edtpunchspeed.getText().toString()));
                 fighter.put("punch_power", Integer.parseInt(edtPunchPower.getText().toString()));
